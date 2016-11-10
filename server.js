@@ -3,7 +3,7 @@
 var db = require('./models');
 
 /////////////////////////////
-//  SETUP and CONFIGURATION
+ // SETUP and CONFIGURATION
 /////////////////////////////
 
 //require express in our app
@@ -24,39 +24,44 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/api/books', function (req, res) {
   // send all books as JSON response
   db.Book.find(function(err, books){
-    if (err) { return console.log("index error: " + err); }
+    if (err) { return console.log("Find server.js error: " + err); }
     res.json(books);
   });
 });
 
 
-app.delete('/api/books', function (req, res) {
-  var id = req.params._id;
-  // send all books as JSON response
-  db.Book.findOneAndRemove({_id: id}, function(err, deletedBook){
-    if (err) { return console.log("Delete error: " + err); }
-    res.json(deletedBook);
-  });
-});
+// app.delete('/api/books', function (req, res) {
+//   var id = req.params._id;
+//   // send all books as JSON response
+//   db.Book.findOneAndRemove({_id: id}, function(err, deletedBook){
+//     if (err) { return console.log("Delete server.js error: " + err); }
+//     res.json(deletedBook);
+//   });
+// });
 
+//
+// app.post('/api/books', function (req, res) {
+//
+//   var newBook = new db.Book ({
+//     title: req.body.title,
+//     author: req.body.author,
+//     image: req.body.image,
+//     // release_date: req.body.release_date
+//   });
+//   newBook.save(function(err, succ) {
+//     if (err) {return console.log("save error. server.js")}
+//     console.log('post success');
+//   });
+//
+// });
 
-app.post('/api/books', function (req, res) {
-
-
-  var newTask = req.body.task;
-  var newDescription = req.body.description;
-  var newId = todos[todos.length - 1]._id + 1;
-   var newTodo = {
-     _id: newId,
-     task: newTask,
-     description: newDescription
-   }
-   todos.push(newTodo)
-
-
-});
-
-
+// app.post('/api/books', function (req, res) {
+//   // create new book with form data (`req.body`)
+//   console.log('books create', req.body);
+//   var newBook = req.body;
+//   books.push(newBook);
+//   res.json(newBook);
+// });
 
 
 
